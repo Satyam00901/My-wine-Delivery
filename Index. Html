@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daru Delivery</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2b2b2b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    .item {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px 0;
+      background: white;
+      border-radius: 5px;
+    }
+    .item h3 {
+      margin: 0;
+    }
+    button {
+      background: green;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 3px;
+      margin-top: 10px;
+    }
+    .cart {
+      margin-top: 30px;
+      border-top: 2px solid #ccc;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Daru Delivery - Noida</h1>
+    <p>Order wine and beer online - Sector 58, 59, 62, 63</p>
+  </header>
+
+  <div class="container">
+    <div class="item">
+      <h3>Kingfisher Beer (650ml)</h3>
+      <p>Price: ₹130</p>
+      <button onclick="addToCart('Kingfisher Beer', 130)">Add to Cart</button>
+    </div>
+    <div class="item">
+      <h3>Old Monk Rum (750ml)</h3>
+      <p>Price: ₹450</p>
+      <button onclick="addToCart('Old Monk Rum', 450)">Add to Cart</button>
+    </div>
+    <div class="item">
+      <h3>Blenders Pride (750ml)</h3>
+      <p>Price: ₹980</p>
+      <button onclick="addToCart('Blenders Pride', 980)">Add to Cart</button>
+    </div>
+
+    <div class="cart">
+      <h2>Cart</h2>
+      <ul id="cart-list"></ul>
+      <p id="total"></p>
+      <a id="whatsapp-link" target="_blank">
+        <button>Checkout on WhatsApp</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const cart = [];
+    function addToCart(item, price) {
+      cart.push({ item, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart-list');
+      const totalDisplay = document.getElementById('total');
+      const whatsappLink = document.getElementById('whatsapp-link');
+      cartList.innerHTML = '';
+      let total = 0;
+      let msg = 'Hi, I want to order:\n';
+      cart.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = `${entry.item} - ₹${entry.price}`;
+        cartList.appendChild(li);
+        total += entry.price;
+        msg += `• ${entry.item} - ₹${entry.price}\n`;
+      });
+      totalDisplay.textContent = `Total: ₹${total}`;
+      msg += `Total: ₹${total}`;
+      whatsappLink.href = `https://wa.me/917838537244?text=${encodeURIComponent(msg)}`;
+    }
+  </script>
+
+</body>
+</html>
